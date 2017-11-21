@@ -29,7 +29,7 @@ public class InvertedIndex {
         allWords = new HashSet();
     }
 
-    public void buildIndex(ArrayList<String> listOfFileNames) {
+    public void buildIndex(ArrayList<String> listOfFileNames, int limit) {
        
         for (String fileName : listOfFileNames) {
             try {
@@ -62,7 +62,7 @@ public class InvertedIndex {
                             else {
                                 // word already in index - check if fileName there
                                 List<String> list = treeMapIndex.get(word);
-                                if (!list.contains(fileName)) {
+                                if (!list.contains(fileName) && list.size() < limit) {
                                     list.add(fileName);
                                 }
                             }
