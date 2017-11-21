@@ -14,7 +14,7 @@ public class IndexMain {
         list.add("File2.txt");
         list.add("File3.txt");
         
-        index.buildIndex(list);
+        index.buildIndex(list, 10);
         
         index.print();  //output index
        
