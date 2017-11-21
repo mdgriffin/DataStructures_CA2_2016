@@ -15,6 +15,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> {
       public V val;
       public Node left;
       public Node right;
+      public Node parent; 
    }
    
    public BinarySearchTreeMap(){
@@ -31,26 +32,35 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> {
       newNode.val = v;
       newNode.left = null;
       newNode.right = null;
-      if (root == null)
+      if (root == null) {
         root = newNode;
-      else
-        insertSub(root, newNode);
+        // CA
+        newNode.parent = null;
+      } else {
+        insertSub(root, newNode);  
+      }
+        
    }
        
    private void insertSub(Node node, Node newNode){
       if (newNode.key.compareTo(node.key) < 0)
-      {  if (node.left == null)
-            node.left = newNode;
-         else
-            insertSub(node.left,newNode);
-      }
-      else if (newNode.key.compareTo(node.key) > 0)
-      {  if (node.right == null) 
-            node.right = newNode;
-         else
-            insertSub(node.right, newNode);
-      }
-      //else //key already in tree => do nothing
+      {  if (node.left == null) {
+          node.left = newNode;
+            // CA
+            newNode.parent = node.left;
+        } else {
+          insertSub(node.left,newNode);
+        }
+      } else if (newNode.key.compareTo(node.key) > 0)
+      {  if (node.right == null) {
+          node.right = newNode;
+             // CA
+            newNode.parent = node.right;
+        } else {
+          insertSub(node.right, newNode);
+        }
+    }
+    //else //key already in tree => do nothing
    }
  
    public void print(){
