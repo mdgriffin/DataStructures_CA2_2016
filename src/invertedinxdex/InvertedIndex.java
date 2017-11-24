@@ -88,9 +88,30 @@ public class InvertedIndex {
 //    }
             
     public List search(String s){
-        
         List<String> value = treeMapIndex.get(s);
         return value;
+    }
+    
+    // CA
+    // find the files that contain both words
+    public List searchAnd(String s1, String s2){
+        List<String> merged = new ArrayList<>();        
+
+        // files containing the first word
+        List<String> value = treeMapIndex.get(s1);
+        
+        // files containing the second word
+        List<String> value2 = treeMapIndex.get(s2);
+        
+        if (value != null && value2 != null) {
+            for (String item : value) {
+                if (value2.contains(item)) {
+                    merged.add(item);
+                }
+            }
+        }
+        
+        return merged;
     }
     
 

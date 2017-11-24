@@ -47,4 +47,32 @@ public class InvertedIndexTest {
         assertEquals(maxFiles, actualNumResults);
     }
     
+    /**
+     * Test of searchAnd method, of class InvertedIndex.
+     */
+    @Test
+    // CA
+    public void testSearchAnd () {
+        System.out.println("=== Test Search And ===");
+        
+        int expectedNumResults = 2;
+        
+        InvertedIndex index = new InvertedIndex();
+        
+        ArrayList<String> list = new ArrayList();
+        
+        //simple files for testing 
+        list.add("File1.txt");
+        list.add("File2.txt");
+        list.add("File3.txt");
+        
+        index.buildIndex(list, 10);
+        
+        List results = index.searchAnd("Trees", "oak");
+        
+        int actualNumResults = results.size();
+        
+        assertEquals(expectedNumResults, actualNumResults);
+    }
+    
 }
