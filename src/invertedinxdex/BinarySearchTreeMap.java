@@ -1,5 +1,7 @@
 package invertedinxdex;
 
+import java.util.LinkedList;
+
 /**
    This class implements a Map based binary search tree whose
    nodes hold keys (of type K) that implement the Comparable
@@ -75,7 +77,40 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> {
          System.out.println(node.key + " " + node.val);         
          printSub(node.right);
       }
-   } 
+   }
+   
+   public void printIterative () {
+       LinkedList<Node> stack  = new LinkedList<>();
+       
+       Node current = root;
+       
+       while (stack.size() > 0 || current != null) {
+            
+            if (current != null) {
+               stack.push(current);
+               current = current.left;
+            } else {
+                Node popped = stack.pop();
+                
+                System.out.println(popped.key + " " + popped.val);
+                
+                current = popped.right;
+            }
+       }
+       
+       /*
+        Create an empty stack
+        Initialize current as root
+        while stack is not empty or current is not null
+            if current is not null
+                push current onto stack
+                set current = current.left
+            else
+                pop the top item from stack.
+                visit the popped_item i.e. output the data on this node
+                set current to popped_item.right
+       */
+   }
    
     
    /*
@@ -129,6 +164,8 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> {
             System.out.println("Sam is on the tree");
         else 
             System.out.println("Sam is not on the tree");
+        
+        bstMap.printIterative();
  
     }
 
